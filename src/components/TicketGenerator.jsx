@@ -63,11 +63,11 @@ const TicketGenerator = () => {
     
 
     return (
-        <div className="md:flex md:items-center justify-center h-[100vh] w-full p-4 bg-gray-900 text-white">
+        <div className="sm:flex gap-4 sm:items-center justify-center h-[100vh] w-full p-4 bg-gray-900 text-white">
             
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
 
-                <h2 className="text-xl font-bold mb-4 text-centre ">CONFERENCE TICKETING GENERATOR</h2>
+                <h2 className="text-2xl font-bold mb-4 bg-gray-900 p-1 rounded-lg text-center ">CONFERENCE TICKET GENERATOR</h2>
 
                 <form onSubmit={handleSubmit}>
 
@@ -95,7 +95,7 @@ const TicketGenerator = () => {
                             type="text"
                             value={formData.fullName}
                             onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                            className="w-full p-2 border rounded text-white font-bold"
+                            className="w-full p-2 border border-blue-500 rounded text-white font-bold"
                         />
                         {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
                     </div>
@@ -108,7 +108,7 @@ const TicketGenerator = () => {
                             type="email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full p-2 border rounded text-white font-bold"
+                            className="w-full p-2 border border-blue-500 rounded text-white font-bold"
                         />
                         {errors.email && <p className="text-red-500">{errors.email}</p>}
                     </div>
@@ -126,7 +126,19 @@ const TicketGenerator = () => {
             </div>
 
             {ticket && (
-                <div className="mt-6 p-6 bg-green-700 rounded-lg shadow-lg w-full max-w-md text-center">
+                <div className="mt-6 bg-green-700 shadow-lg w-full max-w-md text-center">
+
+                    <div className='bg-green-900 w-full h-[200px] border-4 border-white rounded-2xl'>
+
+                        {/* IMAGE POSITION */}
+                        <div>
+                            <img src={ticket.avatar} alt="Avatar" className="w-20 h-20 mx-auto my-2 " />
+                        </div>
+                        {/* END FOR IMAGE POSITION */}
+
+                        
+                    </div>
+
                     <h3 className="text-lg font-bold">Your Ticket</h3>
                     <img src={ticket.avatar} alt="Avatar" className="w-20 h-20 mx-auto rounded-full my-2" />
                     <p className="text-xl font-semibold">{ticket.fullName}</p>

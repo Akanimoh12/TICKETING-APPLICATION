@@ -65,7 +65,7 @@ const TicketGenerator = () => {
     return (
         <div className="lg:flex gap-4 lg:items-center justify-items-center justify-center h-[100vh] w-full p-4 bg-gray-900 text-white">
             
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md ">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md h-auto ">
 
                 <h2 className="text-2xl font-bold mb-4 bg-gray-900 p-1 rounded-lg text-center ">CONFERENCE TICKET GENERATOR</h2>
 

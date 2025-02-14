@@ -1,11 +1,13 @@
+import CardForm from "./components/CardForm";
 import TicketGenerator from "./components/TicketGenerator"
 
 function App() {
 
   return (
-    <>
-      <TicketGenerator/>
-    </>
+    <div>
+      <CardForm/>
+      {/* <TicketGenerator/> */}
+    </div>
   )
 }
 

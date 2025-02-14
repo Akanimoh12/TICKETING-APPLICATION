@@ -36,7 +36,7 @@ const CardForm = () => {
   }, [step1Data, step2Data]);
 
   const handleFileUpload = async (event) => {
-    const file = event.target.files[1];
+    const file = event.target.files[0];
     if (!file) return;
 
     const formData = new FormData();
@@ -74,6 +74,8 @@ const CardForm = () => {
     if (!step2Data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step2Data.email)) {
       newErrors.email = "Enter a valid email address";
     }
+    if (!step2Data.avatar) newErrors.avatar = "Upload an image";
+    if (!step2Data.specialRequest) newErrors.specialRequest = "Enter a special request";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -89,6 +91,13 @@ const CardForm = () => {
       });
       setStep(3);
     }
+  };
+
+  // Reset Form State to default
+  const resetForm = () => {
+    setStep1Data({ ticketType: "Regular", emailNumber: 1 });
+    setStep2Data({ fullName: "", email: "", avatar: "", specialRequest: "" });
+    setErrors({});
   };
 
   // Go back to previous step
@@ -174,7 +183,7 @@ const CardForm = () => {
 
                 <button
                   type="button"
-                  onClick={nextStep}
+                  onClick={resetForm}
                   className=" border-2 border-[#24A0B5] text-[#24A0B5] p-2 rounded "
                 >
                   Cancel
@@ -220,10 +229,8 @@ const CardForm = () => {
               >
                 {step2Data.avatar ? (
                   <img src={step2Data.avatar} alt="Uploaded" className="w-24 h-24 mx-auto rounded-full" />
-                ) : (
-                  <div className=" w-full justify-items-center " > 
-                   <img src="/uploadImage.png" className="w-28 h-28" />
-                  </div>
+                ) : (                  
+                   <img src="/uploadImage.png" className="w-28 h-28" />          
                 )}
                 <input
                   type="file"
@@ -234,6 +241,7 @@ const CardForm = () => {
                 />
               </div>
               {/* END FOR IMAGE UPLOAD */}
+
               {errors.avatar && <p className="text-red-500">{errors.avatar}</p>}
 
               {/* LINE */}
@@ -270,10 +278,14 @@ const CardForm = () => {
               <div className="mb-4">
                 <label className="block ">Special request?</label>
                 <input type="textarea" placeholder="Textarea"
+                value={step2Data.specialRequest}
+                onChange={(e) =>
+                  setStep2Data({ ...step2Data, specialRequest: e.target.value })} 
                   className="w-full p-2 border border-[#0E464F] rounded text-white mt-1 h-22"
                 />
-                {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
+                {errors.specialRequest && <p className="text-red-500">{errors.specialRequest}</p>}
               </div>
+
 
               {/* BUTTONS  */}
               <div className="grid grid-cols-2 gap-2">
@@ -321,8 +333,8 @@ const CardForm = () => {
             </div>
 
             <div className="flex justify-between mt-4">
-              <button onClick={prevStep} className="bg-gray-400 text-white p-2 rounded">
-                Back
+              <button onClick={() => setStep(1)} className="bg-gray-400 text-white p-2 rounded">
+                Book another ticket
               </button>
               <button className="bg-green-500 text-white p-2 rounded">Download</button>
             </div>

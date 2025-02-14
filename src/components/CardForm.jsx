@@ -33,7 +33,7 @@ const CardForm = () => {
   }, [step1Data, step2Data]);
 
   const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[1];
     if (!file) return;
 
     const formData = new FormData();
@@ -158,34 +158,13 @@ const CardForm = () => {
         {step === 2 && (
           <div>
             <h2 className="text-2xl font-bold mb-4">Step 2: Fill Details</h2>
+
+            
+
             <form onSubmit={(e) => e.preventDefault()}>
-              <div className="mb-4">
-                <label className="block font-bold">Full Name:</label>
-                <input
-                  type="text"
-                  value={step2Data.fullName}
-                  onChange={(e) =>
-                    setStep2Data({ ...step2Data, fullName: e.target.value })
-                  }
-                  className="w-full p-2 border border-blue-500 rounded text-white font-bold"
-                />
-                {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
-              </div>
 
-              <div className="mb-4">
-                <label className="block font-bold">Email Address:</label>
-                <input
-                  type="email"
-                  value={step2Data.email}
-                  onChange={(e) =>
-                    setStep2Data({ ...step2Data, email: e.target.value })
-                  }
-                  className="w-full p-2 border border-blue-500 rounded text-white font-bold"
-                />
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
-              </div>
-
-              <div
+            {/* IMAGE UPLOAD */}
+            <div
                 className="border-dashed border-2 border-gray-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-700 transition"
                 onClick={() => document.getElementById("fileUpload").click()}
                 onDrop={(e) => {
@@ -207,6 +186,36 @@ const CardForm = () => {
                   className="hidden"
                 />
               </div>
+              {/* END FOR IMAGE UPLOAD */}
+              {errors.avatar && <p className="text-red-500">{errors.avatar}</p>}
+
+              <div className="my-4">
+                <label className="block font-bold">Full Name:</label>
+                <input
+                  type="text"
+                  value={step2Data.fullName}
+                  onChange={(e) =>
+                    setStep2Data({ ...step2Data, fullName: e.target.value })
+                  }
+                  className="w-full p-2 border border-blue-500 rounded text-black font-bold"
+                />
+                {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-bold">Email Address:</label>
+                <input
+                  type="email"
+                  value={step2Data.email}
+                  onChange={(e) =>
+                    setStep2Data({ ...step2Data, email: e.target.value })
+                  }
+                  className="w-full p-2 border border-blue-500 rounded text-black font-bold"
+                />
+                {errors.email && <p className="text-red-500">{errors.email}</p>}
+              </div>
+
+              
 
 
               <button

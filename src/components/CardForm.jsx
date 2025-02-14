@@ -3,6 +3,7 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 
+
 const CardForm = () => {
   const [step, setStep] = useState(1);
   const [step1Data, setStep1Data] = useState({
@@ -230,7 +231,7 @@ const CardForm = () => {
                 {step2Data.avatar ? (
                   <img src={step2Data.avatar} alt="Uploaded" className="w-24 h-24 mx-auto rounded-full" />
                 ) : (                  
-                   <img src="/uploadImage.png" className="w-28 h-28" />          
+                   <img src="/uploadImage.png" className="w-28 h-28 m-auto" />          
                 )}
                 <input
                   type="file"
@@ -316,29 +317,100 @@ const CardForm = () => {
           </div>
         )}
 
+
+
         {/* Step 3: Display Ticket Details */}
         {step === 3 && (
           <div>
 
             <StepThree/>
 
-            <h2 className="text-2xl font-bold text-center font-[Alatsi] ">Your Ticket is Booked!</h2>
-            <p className="text-center font-[Alatsi]">Check your email for a copy or you can download</p>
+            <h2 className="text-xl font-bold text-center font-[Alatsi] ">Your Ticket is Booked!</h2>
+            <p className="text-center font-[Alatsi] text-sm">Check your email for a copy or you can download</p>
 
-            <div>
-              <h3 className="text-lg font-semibold">Ticket Type: {ticket.ticketType}</h3>
-              <p className="font-bold">{ticket.fullName}</p>
-              <p>{ticket.email}</p>
-              <img src={ticket.avatar} alt="Avatar" className="w-32 h-32 rounded-full" />
+            {/* CARD */}
+            <div id='card' className=" w-[80%] bg-[#072C31] border-2 border-[#24A0B5] my-4 m-auto p-3 ">
+
+              {/* SECTION FOR IMAGE AND DETAILS */}
+              <div className="w-full bg-[#072C31] p-2 border-2 border-[#24A0B5] rounded-2xl border-dashed  ">
+
+                <img src="/Event.png" className="m-auto" />
+
+                {/* USER IMAGE */}
+                  <img src={ticket.avatar} alt="Avatar" className="w-28 h-28 rounded-2xl m-auto my-5 border-4 border-[#24A0B5]" />
+                {/* END FOR USER IMAGE */}
+
+                {/* USER DETAILS FILL */}
+                  <div className="bg-[#08343C] border-2 border-[#133D44] p-2 rounded-xl">
+
+                    {/* FIRST DIV FOR NAME AND EMAIL */}
+                    <div className="grid grid-cols-2 text-[10px]">
+
+                      <div className="w-fit border-r-2 border-gray-500 pr-1">
+                        <p className="text-gray-400">Enter your name</p>
+                        <p className="font-bold">{ticket.fullName}</p>
+                      </div>
+
+                      <div className="w-full flex-wrap ">
+                        <p className="text-gray-400">Enter your email</p>
+                        <p className="font-bold break-words ">{ticket.email}</p>
+                      </div>
+                      
+                    </div>
+                    {/* END FOR FIRST DIV FOR NAME AND EMAIL */}
+
+                    {/* SECOND DIV FOR TICKET TYP AND TICKET FOR */}
+                    <div className="grid grid-cols-2 text-[10px] border-y-2 border-gray-500 py-1">
+
+                      <div className="w-fit ">
+                        <p className="text-gray-400">Ticket type:</p>
+                        <p className="font-bold">{ticket.ticketType}</p>
+                      </div>
+
+                      <div className="w-fit">
+                        <p className="text-gray-400">Ticket for:</p>
+                        <p className="font-bold">{ticket.emailNumber}</p>
+                      </div>
+                      
+                    </div>
+                    {/* END FOR SECOND DIV FOR TICKET TYP AND TICKET FOR */}
+
+                    {/* THIRD DIV FOR SPECIAL REQUEST */}
+                    <div className="text-[10px]">
+                      <p className="text-gray-400">Special request:</p>
+                      <p className="font-bold ">{ticket.specialRequest}</p>
+                    </div>
+                    {/* END FOR THIRD DIV FOR SPECIAL REQUEST */}             
+
+                  </div>
+                {/* END FOR USER DETAILS FILL */}
+
+              </div>
+              {/* END FOR SECTION FOR IMAGE AND DETAILS */}
+
+
+
+              {/* SECTION FOR QR CODE */} 
+              <div className="w-full bg-[#072C31] border-2 border-[#24A0B5] rounded-2xl p-2 border-dashed ">
+                <img src="/barCode.png" className="m-auto w-[70%]" />                
+              </div>
+              {/* END FOR SECTION FOR QR CODE */}
+
             </div>
+            {/* END FOR CARD */}
 
-            <div className="flex justify-between mt-4">
-              <button onClick={() => setStep(1)} className="bg-gray-400 text-white p-2 rounded">
-                Book another ticket
+            <div className="grid grid-cols-2 gap-3 justify-between mt-4">
+
+              <button onClick={() => setStep(1)} className="border-2 border-[#24A0B5] font-bold text-[11px] text-[#24A0B5] p-2 rounded">
+                Book Another Ticket
               </button>
-              <button className="bg-green-500 text-white p-2 rounded">Download</button>
+
+              <button className="bg-[#24A0B5] text-[11px] font-bold text-white p-2 rounded">Download Ticket</button>
+
             </div>
+
           </div>
+
         )}
       </div>
     </div>

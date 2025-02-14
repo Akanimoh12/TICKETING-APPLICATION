@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
 
 const CardForm = () => {
   const [step, setStep] = useState(1);
@@ -92,80 +95,122 @@ const CardForm = () => {
   const prevStep = () => setStep(step - 1);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-96">
-        {/* Step 1: Ticket Type & Email */}
+    <div className="bg-[#02191D] flex justify-center items-center min-h-screen   ">
+
+      <div className=" p-6 rounded-xl shadow-lg w-96 border-2 text-white border-[#0E464F] bg-[#02191D] ">
+
+        {/* Step 1: Ticket Type & Number */}
         {step === 1 && (
-          <div>
+          <div className="">
 
-            <h2 className="text-xl font-bold mb-4">Step 1: Personal Info</h2>
+            <StepOne />
 
-            {/* Ticket Type Selection */}
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { label: "Regular", price: "Free" },
-                { label: "VIP", price: "$150" },
-                { label: "VVIP", price: "$150" },
-              ].map((ticket) => (
-                <div
-                  key={ticket.label}
-                  className={`p-4 rounded-lg border ${step1Data.ticketType === ticket.label
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-800 text-gray-300"
-                    } cursor-pointer text-center`}
-                  onClick={() => setStep1Data({ ...step1Data, ticketType: ticket.label })}
-                >
-                  <h3 className="font-bold">{ticket.price}</h3>
-                  <p className="text-sm">{ticket.label} ACCESS</p>
+            {/* LINE */}
+            <div className="bg-[#08252B] border-2 border-[#0E464F] rounded-2xl w-full p-3 ">
+              {/* END LINE */}
+
+              {/* TITLE FOR IMAGE */}
+              <div>
+                <img src="/Step1_Title.png" />
+              </div>
+              {/* END FOR TITLE FOR IMAGE */}
+
+              {/* LINE */}
+              <div className="w-full h-[2px] bg-[#0E464F] my-4"></div>
+              {/* END FOR LINE */}
+
+              {/* Ticket Type Selection */}
+
+              <h4 className="mb-2 text-sm text-extralight">Select Ticket Type:</h4>
+
+              {/* CARD FOR THE SELECTION */}
+              <div className="">
+
+                <div className="grid grid-cols-3 gap-4 p-3 bg-[#052228] rounded-2xl border-2 border-[#07373F]">
+                  {[
+                    { label: "Regular", price: "Free" },
+                    { label: "VIP", price: "$150" },
+                    { label: "VVIP", price: "$150" },
+                  ].map((ticket) => (
+                    <div
+                      key={ticket.label}
+                      className={`p-3 rounded-lg border ${step1Data.ticketType === ticket.label
+                        ? "bg-[#12464E] border-[#197686] text-white"
+                        : "border-[#197686] text-gray-300"
+                        } cursor-pointer text-center`}
+                      onClick={() => setStep1Data({ ...step1Data, ticketType: ticket.label })}
+                    >
+                      <h3 className="font-bold">{ticket.price}</h3>
+                      <p className="text-sm">{ticket.label} ACCESS</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+              </div>
+              {/* CARD FOR THE SELECTION */}
+
+
+              {/* Number (Dropdown) Selection */}
+              <div className="my-4">
+                <label className="block text-sm text-extralight border-[#197686]  ">Number of Tickets</label>
+                <select
+                  name="emailNumber"
+                  value={step1Data.emailNumber}
+                  onChange={(e) =>
+                    setStep1Data({ ...step1Data, emailNumber: e.target.value })
+                  }
+                  className="w-full p-2 border border-[#197686] bg-[#041E23] rounded-xl my-2"
+                >
+                  <option value="">Select a number</option>
+                  {[...Array(10).keys()].map((i) => (
+                    <option key={i} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className=" gap-3 grid grid-cols-2 ">
+
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className=" border-2 border-[#24A0B5] text-[#24A0B5] p-2 rounded "
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="bg-[#24A0B5] text-white p-2 rounded "
+                >
+                  Next
+                </button>
+
+              </div>
+
+
             </div>
 
-
-            {/* Email (Dropdown) Selection */}
-            <div className="mb-4">
-              <label className="block font-bold">Select Number (1-10):</label>
-              <select
-                name="emailNumber"
-                value={step1Data.emailNumber}
-                onChange={(e) =>
-                  setStep1Data({ ...step1Data, emailNumber: e.target.value })
-                }
-                className="w-full p-2 border rounded mb-2"
-              >
-                <option value="">Select a number</option>
-                {[...Array(10).keys()].map((i) => (
-                  <option key={i} value={i + 1}>
-                    {i + 1}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <button
-              type="button"
-              onClick={nextStep}
-              className="bg-blue-500 text-white p-2 rounded w-full"
-            >
-              Next
-            </button>
 
 
           </div>
         )}
 
-        {/* Step 2: Full Name, Email, and Avatar Upload */}
+
+
+        {/* Step 2: Avatar Upload, Full Name and Email */}
         {step === 2 && (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Step 2: Fill Details</h2>
 
-            
+            <StepTwo />
 
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={(e) => e.preventDefault()} className="p-4 bg-[#08252B] border-2 border-[#0E464F] rounded-2xl">
 
-            {/* IMAGE UPLOAD */}
-            <div
-                className="border-dashed border-2 border-gray-600 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-700 transition"
+              {/* IMAGE UPLOAD */}
+              <div
+                className=" border-dashed border-2 border-[#0E464F] rounded-lg p-2  text-center cursor-pointer hover:bg-[#041E23] transition"
                 onClick={() => document.getElementById("fileUpload").click()}
                 onDrop={(e) => {
                   e.preventDefault();
@@ -176,7 +221,9 @@ const CardForm = () => {
                 {step2Data.avatar ? (
                   <img src={step2Data.avatar} alt="Uploaded" className="w-24 h-24 mx-auto rounded-full" />
                 ) : (
-                  <p className="text-gray-400">Drag & drop or click to upload</p>
+                  <div className=" w-full justify-items-center " > 
+                   <img src="/uploadImage.png" className="w-28 h-28" />
+                  </div>
                 )}
                 <input
                   type="file"
@@ -189,71 +236,95 @@ const CardForm = () => {
               {/* END FOR IMAGE UPLOAD */}
               {errors.avatar && <p className="text-red-500">{errors.avatar}</p>}
 
+              {/* LINE */}
+              <div className="bg-[#08252B] border-2 border-[#0E464F] w-full my-3  "></div>
+              {/* END LINE */}
+
+
               <div className="my-4">
-                <label className="block font-bold">Full Name:</label>
+                <label className="block">Enter your name</label>
                 <input
                   type="text"
                   value={step2Data.fullName}
                   onChange={(e) =>
                     setStep2Data({ ...step2Data, fullName: e.target.value })
                   }
-                  className="w-full p-2 border border-blue-500 rounded text-black font-bold"
+                  className="w-full p-2 border border-[#0E464F] rounded text-white mt-1"
                 />
                 {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
               </div>
 
               <div className="mb-4">
-                <label className="block font-bold">Email Address:</label>
+                <label className="block ">Enter your email*</label>
                 <input
                   type="email"
                   value={step2Data.email}
                   onChange={(e) =>
                     setStep2Data({ ...step2Data, email: e.target.value })
                   }
-                  className="w-full p-2 border border-blue-500 rounded text-black font-bold"
+                  className="w-full p-2 border border-[#0E464F] rounded text-white mt-1"
                 />
                 {errors.email && <p className="text-red-500">{errors.email}</p>}
               </div>
 
-              
+              <div className="mb-4">
+                <label className="block ">Special request?</label>
+                <input type="textarea" placeholder="Textarea"
+                  className="w-full p-2 border border-[#0E464F] rounded text-white mt-1 h-22"
+                />
+                {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
+              </div>
+
+              {/* BUTTONS  */}
+              <div className="grid grid-cols-2 gap-2">
+
+                <button
+                  onClick={prevStep}
+                  className=" border-2 border-[#24A0B5] text-[#24A0B5] p-2 rounded w-full"
+                >
+                  Back
+                </button>
+
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="bg-[#24A0B5] text-white p-2 rounded w-full"
+                >
+                  Get Ticket
+                </button>
 
 
-              <button
-                type="button"
-                onClick={nextStep}
-                className="bg-blue-500 text-white p-2 rounded w-full"
-              >
-                Generate Ticket
-              </button>
+              </div>
+
+
+
             </form>
 
-            {/* Back Button */}
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={prevStep}
-                className="bg-gray-400 text-white p-2 rounded w-full"
-              >
-                Back
-              </button>
-            </div>
+
           </div>
         )}
 
         {/* Step 3: Display Ticket Details */}
         {step === 3 && (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Ticket Generated</h2>
+
+            <StepThree/>
+
+            <h2 className="text-2xl font-bold text-center font-[Alatsi] ">Your Ticket is Booked!</h2>
+            <p className="text-center font-[Alatsi]">Check your email for a copy or you can download</p>
+
             <div>
               <h3 className="text-lg font-semibold">Ticket Type: {ticket.ticketType}</h3>
               <p className="font-bold">{ticket.fullName}</p>
               <p>{ticket.email}</p>
               <img src={ticket.avatar} alt="Avatar" className="w-32 h-32 rounded-full" />
             </div>
+
             <div className="flex justify-between mt-4">
               <button onClick={prevStep} className="bg-gray-400 text-white p-2 rounded">
                 Back
               </button>
-              <button className="bg-green-500 text-white p-2 rounded">Submit</button>
+              <button className="bg-green-500 text-white p-2 rounded">Download</button>
             </div>
           </div>
         )}
